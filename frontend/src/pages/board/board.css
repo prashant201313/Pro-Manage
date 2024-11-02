@@ -1,0 +1,153 @@
+.board {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 0.8rem 1.5rem;
+        font-family: "Poppins", sans-serif;
+
+        .utils {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h3 {
+                cursor: default;
+                font-family: "Open Sans", sans-serif;
+            }
+
+            .date {
+                color: #707070;
+                font-weight: 500;
+                cursor: default;
+            }
+
+            .board-add {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.6rem;
+
+                .dashboard {
+                    font-weight: 500;
+                    font-size: 1.5rem;
+                    cursor: default;
+                }
+
+                .boardAssignedTo {
+                    padding: 0.4rem 0.5rem;
+                    font-size: 0.8rem;
+                    background-color: #FFEBEB;
+                    border-radius: 50%;
+                    cursor: default;
+                }
+
+                .add-people {
+                    color: #707070;
+                    font-size: 0.8rem;
+                    font-weight: 550;
+                    cursor: pointer;
+                }
+            }
+
+            .filter {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.3rem;
+                cursor: pointer;
+            }
+
+            .all-filters {
+                position: absolute;
+                right: 1.5rem;
+                top: 6rem;
+                padding: 0.8rem 1rem;
+                width: 8rem;
+                height: fit-content;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                font-weight: 600;
+                font-size: 0.8rem;
+                background-color: #FFFFFF;
+                border-radius: 12px;
+                box-shadow: 0px 2px 22px 0px #7E7A7A40;
+                z-index: 2;
+
+                li {
+                    list-style: none;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .all-categories {
+        display: flex;
+        gap: 1.3rem;
+        justify-content: space-between;
+        flex-grow: 1;
+        padding: 0 1.5rem 0.4rem 1.5rem;
+        overflow-x: auto;
+
+        .categories {
+            min-width: 28%;
+            background-color: #EEF2F5;
+            border-radius: 8px;
+
+            .category-name {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 0.9rem;
+                font-weight: 500;
+                padding: 1rem 0.8rem 0.7rem;
+                font-family: "Poppins", sans-serif;
+
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                }
+            }
+
+            .created-task {
+                height: 90%;
+                display: flex;
+                flex-direction: column;
+                gap: 0.9rem;
+                padding: 0 0.3rem 0 0.8rem;
+                overflow-y: auto;
+            }
+
+            .created-task::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            .created-task::-webkit-scrollbar-thumb {
+                border-radius: 8px;
+                background-color: #9CB7C5;
+            }
+
+            .created-task::-webkit-scrollbar-track {
+                border-radius: 8px;
+                background-color: #D6EAF4;
+            }
+        }
+    }
+
+    .all-categories::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .all-categories::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background-color: #9CB7C5;
+    }
+}

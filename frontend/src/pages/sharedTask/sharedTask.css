@@ -1,0 +1,168 @@
+.sharedTask {
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+
+    .brand {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        width: max-content;
+        padding: 1rem 1.5rem;
+        cursor: default;
+    }
+
+    .task {
+        height: 92vh;
+        display: flex;
+        justify-content: center;
+        padding: 3rem;
+
+        .task-details {
+            width: 32%;
+            height: max-content;
+            padding: 2.5rem 0;
+            border: 2px solid #EDF5FE;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+
+            .priority {
+                display: flex;
+                align-items: center;
+                gap: 0.3rem;
+                padding: 0 1.3rem;
+
+                .bullet {
+                    padding: 0.25rem;
+                    border-radius: 50%;
+                }
+
+                p {
+                    color: #707070;
+                    font-size: 0.6rem;
+                    font-weight: 550;
+                    cursor: default;
+                }
+            }
+
+            .title {
+                font-size: 1.2rem;
+                font-weight: 500;
+                margin: 0.8rem 0 1.3rem;
+                padding: 0 1.3rem;
+                cursor: default;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .checklist {
+                font-size: 0.9rem;
+                font-weight: 500;
+                padding: 0 1.3rem;
+                cursor: default;
+            }
+
+            .all-checklist {
+                padding: 0 1.3rem;
+                height: max-content;
+                max-height: 45vh;
+                overflow: auto;
+
+                .input-task {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.8rem;
+                    padding: 0 0.9rem;
+                    margin-top: 0.6rem;
+                    border: 1px solid #E2E2E2;
+                    border-radius: 10px;
+
+                    input[type="checkbox"] {
+                        transform: scale(1.4);
+                        -webkit-transform: scale(1.4);
+                        margin: 2px 0 0 2px;
+                        accent-color: #17A2B8;
+                    }
+
+                    .inputBox {
+                        width: 100%;
+                        height: 100%;
+                        padding: 0.6rem 0;
+                        border: none;
+                        outline: none;
+                        color: #20102B;
+                        font-size: 1rem;
+                        cursor: default;
+                        font-family: "Inter", sans-serif;
+                    }
+                }
+            }
+
+            .all-checklist::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            .all-checklist::-webkit-scrollbar-thumb {
+                border-radius: 8px;
+                background-color: #9CB7C5;
+            }
+
+            .due-date {
+                display: flex;
+                align-items: center;
+                margin-top: 0.8rem;
+
+                span {
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    padding: 0 1.3rem;
+                    cursor: default;
+                }
+
+                button {
+                    padding: 0.3rem 0.5rem;
+                    border: none;
+                    color: #767575;
+                    font-size: 0.7rem;
+                    font-weight: 500;
+                    border-radius: 8px;
+                    background-color: #EEECEC;
+                    font-family: "Poppins", sans-serif;
+                }
+            }
+        }
+    }
+
+    .loadingTask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #303D438C;
+    }
+}
+
+@media (max-width: 429px) {
+    .sharedTask {
+        .task {
+            height: 91vh;
+            padding: 1rem 1.5rem;
+
+            .task-details {
+                width: 100%;
+                height: max-content;
+                padding: 2.5rem 0;
+                border: 2px solid #EDF5FE;
+                background-color: #FFFFFF;
+                border-radius: 10px;
+            }
+        }
+    }
+}

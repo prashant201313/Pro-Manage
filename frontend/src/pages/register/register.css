@@ -1,0 +1,109 @@
+.register {
+    display: flex;
+    height: 100vh;
+    font-family: "Open Sans", sans-serif;
+
+    .img-section {
+        width: 60vw;
+    }
+
+    .form-section {
+        width: 40vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #FFFFFF;
+
+        
+        form {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+
+            h2 {
+                text-align: center;
+                color: #343434;
+                margin-bottom: 2rem;
+            }
+
+            .inputBox {
+                display: flex;
+                align-items: center;
+                border-radius: 6px;
+                padding-right: 0.5rem;
+                overflow: hidden;
+
+                input {
+                    width: 100%;
+                    padding: 0.6rem 0.6rem 0.6rem 0;
+                    font-weight: 500;
+                    font-family: "Open Sans", sans-serif;
+                    border: transparent;
+                    outline: none;
+
+                    &::placeholder {
+                        color: #828282;
+                    }
+                }
+
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #828282;
+                    cursor: pointer;
+                    font-size: 1.5rem;
+                }
+            }
+
+            .error-para {
+                color: #CF3636;
+                font-size: 0.7rem;
+                text-align: left;
+            }
+
+            .btn {
+                padding: 0.6rem;
+                border-radius: 20px;
+                color: #FFFFFF;
+                border: none;
+                cursor: pointer;
+                font-family: "Open Sans", sans-serif;
+            }
+
+            .reg {
+                background-color: #17A2B8;
+                margin: 0.7rem 0 0.6rem;
+
+                &:hover {
+                    background-color: #0394ab;
+                }
+            }
+
+            p {
+                text-align: center;
+                font-size: 0.8rem;
+                color: #828282;
+            }
+
+            .log {
+                border: 1.5px solid #17A2B8;
+                background-color: #FFFFFF;
+                color: #17A2B8;
+            }
+        }
+    }
+}
+
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #303D438C;
+}

@@ -1,0 +1,62 @@
+.settings {
+    padding: 0.8rem 1.5rem;
+    font-family: "Open Sans", sans-serif;
+
+    .form-section {
+        width: 25vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #FFFFFF;
+        margin-top: 1.5rem;
+        
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+
+            .inputBox {
+                display: flex;
+                align-items: center;
+                border-radius: 6px;
+                padding-right: 0.5rem;
+                border: 1.8px solid #D0D0D0;
+                overflow: hidden;
+
+                input {
+                    width: 100%;
+                    padding: 0.6rem 0.6rem 0.6rem 0;
+                    font-weight: 500;
+                    font-family: "Open Sans", sans-serif;
+                    border: transparent;
+                    outline: none;
+
+                    &::placeholder {
+                        color: #828282;
+                    }
+                }
+
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #828282;
+                    cursor: pointer;
+                    font-size: 1.5rem;
+                }
+            }
+
+            .btn {
+                padding: 0.6rem;
+                border-radius: 20px;
+                color: #FFFFFF;
+                border: none;
+                background-color: #17A2B8;
+                margin: 0.7rem 0 0.6rem;
+                cursor: pointer;
+                font-family: "Open Sans", sans-serif;
+            }
+        }
+    }
+}
