@@ -107,7 +107,7 @@ export default function TaskCard({ taskId, openChecklist, setOpenChecklist, onCa
     };
 
     const handleShare = (taskId) => {
-        const taskLink = `http://localhost:5173/task/${taskId}`;
+        const taskLink = `https://pro-manage-pi.vercel.app/task/${taskId}`;
 
         navigator.clipboard.writeText(taskLink)
             .then(() => {
