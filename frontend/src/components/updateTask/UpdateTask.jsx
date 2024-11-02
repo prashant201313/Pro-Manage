@@ -299,7 +299,7 @@ export default function UpdateTask({ taskId, onClose }) {
 
                             <div className='cancel-save'>
                                 <button id='cancel' className='btns' onClick={onClose}>Cancel</button>
-                                <button id='save' className='btns' type='submit'>Save</button>
+                                <button id='save' className='btns' style={{cursor: loading ? "not-allowed" : "pointer"}} type='submit'>Save</button>
                             </div>
                         </div>
                     </form>

@@ -158,6 +158,7 @@
         #due-date {
             background-color: #DBDBDB;
             color: #5A5A5A;
+            cursor: default;
         }
 
         .section-btns {

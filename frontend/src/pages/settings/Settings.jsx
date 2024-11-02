@@ -5,6 +5,7 @@ import { CiMail, CiLock } from "react-icons/ci";
 import { PiEye, PiEyeSlash } from "react-icons/pi";
 import { updateUserFields } from '../../apis/user';
 import { toast } from "react-toastify";
+import Loader from '../../components/Loader';
 
 export default function Settings() {
     const [showOldPassword, setShowOldPassword] = useState(false);
@@ -46,6 +47,12 @@ export default function Settings() {
             return false;
         }
 
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+        if (newPassword && !passwordRegex.test(newPassword)) {
+            toast.error("New password is weak (must be atleast 8 characters with 1 uppercase, 1 lowercase, 1 number & 1 special symbol)");
+            return false;
+        }
+
         return true;
     };
 
@@ -60,7 +67,7 @@ export default function Settings() {
         if (response?.message === "Old password is incorrect") {
             toast.error("Old password is incorrect!");
         }
-        else if(response) {
+        else if (response) {
             toast.success("User details updated successfully!");
             setUpdateFormData({
                 newName: "",
@@ -137,6 +144,12 @@ export default function Settings() {
                     <button type="submit" className='btn'>Update</button>
                 </form>
             </div>
+
+            {loading &&
+                <div className='loader'>
+                    <Loader />
+                </div>
+            }
         </div>
     );
 }

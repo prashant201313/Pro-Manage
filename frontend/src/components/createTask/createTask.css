@@ -192,6 +192,7 @@
                             -webkit-transform: scale(1.4);
                             margin: 2px 0 0 2px;
                             accent-color: #17A2B8;
+                            cursor: pointer;
                         }
 
                         .inputBox {

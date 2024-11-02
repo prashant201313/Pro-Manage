@@ -94,7 +94,9 @@ export default function TaskCard({ taskId, openChecklist, setOpenChecklist, onCa
     };
 
     const handleCategoryChange = async (category) => {
+        setLoading(true);
         const result = await updateTaskCategory(taskId, category);
+        setLoading(false);
         if (result) {
             setTaskData(prevState => ({
                 ...prevState,
@@ -244,7 +246,7 @@ export default function TaskCard({ taskId, openChecklist, setOpenChecklist, onCa
 
                     <div className='btons'>
                         {taskData.category === 'Done' ? (
-                            <button style={{ backgroundColor: '#63C05B', color: '#FFFFFF' }} className='btn'>Done</button>
+                            <button style={{ backgroundColor: '#63C05B', color: '#FFFFFF', cursor: "default" }} className='btn'>Done</button>
                         ) : taskData.dueDate ? (
                             <button id='due-date' style={isHighPriorityOverdue ? { backgroundColor: '#CF3636', color: '#FFFFFF' } : {}} className='btn'>{moment(taskData.dueDate).format('MMM Do')}</button>
                         ) : (

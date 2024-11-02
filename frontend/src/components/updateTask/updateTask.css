@@ -263,7 +263,6 @@
                         padding: 0.5rem 1.3rem;
                         font-weight: 550;
                         border-radius: 9px;
-                        cursor: pointer;
                         font-family: "Poppins", sans-serif;
                     }
 
@@ -271,6 +270,7 @@
                         color: #CF3636;
                         background: transparent;
                         border: 1px solid #CF3636;
+                        cursor: pointer;
 
                         &:hover {
                             background-color: #CF3636;

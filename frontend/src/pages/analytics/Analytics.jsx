@@ -2,20 +2,26 @@ import React, { useEffect, useState } from 'react';
 import "./analytics.css";
 import { getAllTasks, getAssignedTasks } from '../../apis/task';
 import { currentUserDetails } from '../../apis/user';
+import Loader from '../../components/Loader';
 
 export default function Analytics() {
   const [allTasks, setAllTasks] = useState([]);
   const [assignedTasks, setAssignedTasks] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchUserDetails = async () => {
+    setLoading(true);
     const response = await currentUserDetails();
+    setLoading(false);
     if (response) {
       localStorage.setItem('userId', response.UserData._id);
     }
   };
 
   const fetchAllTasks = async () => {
+    setLoading(true);
     const response = await getAllTasks();
+    setLoading(false);
     if (response) {
       setAllTasks(response?.data || []);
     }
@@ -118,6 +124,12 @@ export default function Analytics() {
           </div>
         </div>
       </div>
+
+      {loading &&
+        <div className='loader'>
+          <Loader />
+        </div>
+      }      
     </div>
   );
 }

@@ -10,6 +10,7 @@ import AddPeople from '../../components/addPeople/AddPeople';
 import CreateTask from '../../components/createTask/CreateTask';
 import TaskCard from '../../components/taskCard/TaskCard';
 import { getAllTasks, getAssignedTasks } from '../../apis/task';
+import Loader from '../../components/Loader';
 
 export default function Board() {
   const [userName, setUserName] = useState("User");
@@ -149,6 +150,12 @@ export default function Board() {
           </div>
         ))}
       </div>
+
+      {loading &&
+        <div className='loader'>
+          <Loader />
+        </div>
+      }
 
       {openToAddPeople &&
         <AddPeople
