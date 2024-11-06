@@ -87,6 +87,11 @@ export default function Board() {
         task._id === taskId ? { ...task, category: newCategory } : task
       )
     );
+    setMultipleAssignedTask(prevTasks =>
+      prevTasks.map(task =>
+        task._id === taskId ? { ...task, category: newCategory } : task
+      )
+    );
   };
 
   const categorizedTasks = [...allTasks, ...assignedTasks, ...multipleAssignedTask].reduce((categories, task) => {

@@ -142,7 +142,7 @@ export default function CreateTask({ onClose, callAgain }) {
 
         if (response) {
             onClose();
-            toast.success("Story created successfully!");
+            toast.success("Task created successfully!");
             callAgain.forEach(func => func());
         }
     }
