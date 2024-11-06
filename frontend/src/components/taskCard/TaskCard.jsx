@@ -129,7 +129,7 @@ export default function TaskCard({ taskId, openChecklist, setOpenChecklist, onCa
             setLoading(false);
             if (response) {
                 setOpenDelete(false);
-                toast.success("Quiz deleted successfully!");
+                toast.success("Task deleted successfully!");
                 callAgain.forEach(func => func());
             }
         }
