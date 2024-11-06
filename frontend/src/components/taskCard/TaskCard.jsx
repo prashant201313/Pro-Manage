@@ -26,7 +26,8 @@ export default function TaskCard({ taskId, openChecklist, setOpenChecklist, onCa
         checkList: [],
         checked: [],
         dueDate: null,
-        category: 'To-do'
+        category: 'To-do',
+        assignedUsersId: [],
     });
 
     function getInitials(name) {

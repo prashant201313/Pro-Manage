@@ -1,6 +1,6 @@
 const express = require("express");
 const { userSignUp, userSignIn, userLogout, updateUser, userDetails, getAllUsersExceptCurrent, getAssigneeDetails } = require("../controller/user");
-const { createTask, allTasks, getTaskDetails, updateTaskChecklist, getAssignedTasks, updateTaskCategory, deleteTask, updateTask  } = require("../controller/task");
+const { createTask, allTasks, getTaskDetails, updateTaskChecklist, getAssignedTasks, updateTaskCategory, deleteTask, updateTask, assignTasksToUser, getTasksAssignedByUser } = require("../controller/task");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 const router = express.Router();
@@ -22,5 +22,9 @@ router.put('/task/:taskId/checklist', updateTaskChecklist);
 router.put('/task/update-category', updateTaskCategory);
 router.post("/task/delete-task", authMiddleware, deleteTask);
 router.put("/task/:taskId", authMiddleware, updateTask);
+
+// for multiple users
+router.post("/tasks/assign-tasks", authMiddleware, assignTasksToUser);
+router.get("/tasks/assigned-tasks/:originalUserId?", authMiddleware, getTasksAssignedByUser);
 
 module.exports = router

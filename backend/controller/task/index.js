@@ -1,4 +1,5 @@
 const Task = require("../../models/taskModel");
+const User = require("../../models/userModel");
 
 const createTask = async (req, res) => {
     try {
@@ -175,4 +176,91 @@ const updateTask = async (req, res) => {
     }
 }
 
-module.exports = { createTask, allTasks, getTaskDetails, updateTaskChecklist, getAssignedTasks, updateTaskCategory, deleteTask, updateTask };
+const assignTasksToUser = async (req, res) => {
+    try {
+        const currentUser = req.user._id;
+        const { newAssigneeEmail } = req.body;
+
+        const newAssignee = await User.findOne({ email: newAssigneeEmail });
+        if (!newAssignee) {
+            return res.status(404).json({ message: "User to assign not found" });
+        }
+
+        // Find all tasks created by or assigned to the current user
+        const tasks = await Task.find({
+            $or: [
+                { userId: currentUser },
+                { assignedUsersId: currentUser }
+            ]
+        });
+
+        // Update each task to include the new assignee
+        await Promise.all(
+            tasks.map(async (task) => {
+                if (!task.assignedUsersId.includes(newAssignee._id)) {
+                    task.assignedUsersId.push(newAssignee._id);
+                }
+                await task.save();
+            })
+        );
+
+        res.status(200).json({ message: "Tasks successfully assigned" });
+    } 
+    catch (error) {
+        res.status(500).json({ error: error.message, message: "Error assigning tasks" });
+    }
+};
+
+const getTasksAssignedByUser = async (req, res) => {
+    try {
+        const currentUser = req.user._id;
+        const { originalUserId } = req.params;
+        const { filter } = req.query;
+        
+        let dateFilter = {};
+
+        const tasksAssignedToCurrentUser = await Task.find({
+            assignedUsersId: currentUser
+        }).select('userId');
+
+        const uniqueAssigningUserIds = [...new Set(tasksAssignedToCurrentUser.map(task => task.userId.toString()))];
+
+        const finalOriginalUserId = originalUserId || uniqueAssigningUserIds[0];
+        
+        if (!finalOriginalUserId) {
+            return res.status(404).json({ message: "No assigners found for the current user" });
+        }
+
+        console.log("Using Original User ID for filtering:", finalOriginalUserId);
+
+        // Apply filter based on the selected time range
+        if (filter === 'Today') {
+            dateFilter = { dueDate: { $eq: new Date().toISOString().split('T')[0] } }; // only tasks due today
+        } 
+        else if (filter === 'This week') {
+            const startOfWeek = new Date();
+            startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(endOfWeek.getDate() + 6);
+            dateFilter = { dueDate: { $gte: startOfWeek, $lt: endOfWeek } }; // tasks due this week
+        } 
+        else if (filter === 'This month') {
+            const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+            const endOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+            dateFilter = { dueDate: { $gte: startOfMonth, $lt: endOfMonth } }; // tasks due this month
+        }
+
+        const tasks = await Task.find({
+            assignedUsersId: currentUser,
+            userId: finalOriginalUserId,
+            ...dateFilter
+        });
+
+        console.log("Tasks fetched from backend:", tasks);
+        res.status(200).json({ data: tasks, message: "Tasks assigned by specified user fetched" });
+    } catch (error) {
+        res.status(500).json({ error: error.message, message: "Error fetching tasks assigned by user" });
+    }
+};
+
+module.exports = { createTask, allTasks, getTaskDetails, updateTaskChecklist, getAssignedTasks, updateTaskCategory, deleteTask, updateTask, assignTasksToUser, getTasksAssignedByUser };

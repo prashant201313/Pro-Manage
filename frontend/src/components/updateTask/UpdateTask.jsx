@@ -24,7 +24,8 @@ export default function UpdateTask({ taskId, onClose }) {
         checkList: [],
         checked: [],
         dueDate: null,
-        category: 'To-do'
+        category: 'To-do',
+        assignedUsersId: [],
     });
 
     const fetchTaskData = async () => {

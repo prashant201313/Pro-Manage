@@ -24,7 +24,8 @@ export default function CreateTask({ onClose, callAgain }) {
         checkList: [],
         checked: [],
         dueDate: null,
-        category: 'To-do'
+        category: 'To-do',
+        assignedUsersId: [],
     });
 
     const formatDate = (date) => {

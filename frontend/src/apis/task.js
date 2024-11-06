@@ -89,3 +89,29 @@ export const updateTaskFields = async (taskId, updatedFields) => {
         console.error("Error while updating task: ", error.response?.data?.message || error.message);
     }
 };
+
+export const assignTasksToUser = async (newAssigneeEmail) => {
+    try {
+        const reqUrl = `${backendUrl}/api/v1/tasks/assign-tasks`;
+        const response = await axios.post(reqUrl, { newAssigneeEmail }, { withCredentials: true });
+        return response.data;
+    } 
+    catch (error) {
+        console.error("Error assigning tasks:", error);
+    }
+};
+
+export const getTasksAssignedByUser = async (originalUserId, filter) => {
+    try {
+        // If `originalUserId` is not provided, skip it in the URL
+        const reqUrl = originalUserId 
+            ? `${backendUrl}/api/v1/tasks/assigned-tasks/${originalUserId}?filter=${filter}` 
+            : `${backendUrl}/api/v1/tasks/assigned-tasks?filter=${filter}`;
+        
+        const response = await axios.get(reqUrl, { withCredentials: true });
+        return response.data;
+    } 
+    catch (error) {
+        console.error("Error fetching assigned tasks:", error);
+    }
+};

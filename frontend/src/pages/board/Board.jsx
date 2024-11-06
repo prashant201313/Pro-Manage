@@ -9,7 +9,7 @@ import { currentUserDetails } from '../../apis/user';
 import AddPeople from '../../components/addPeople/AddPeople';
 import CreateTask from '../../components/createTask/CreateTask';
 import TaskCard from '../../components/taskCard/TaskCard';
-import { getAllTasks, getAssignedTasks } from '../../apis/task';
+import { getAllTasks, getAssignedTasks, getTasksAssignedByUser } from '../../apis/task';
 import Loader from '../../components/Loader';
 
 export default function Board() {
@@ -20,6 +20,7 @@ export default function Board() {
   const [openCreateTask, setOpenCreateTask] = useState(false);
   const [allTasks, setAllTasks] = useState([]);
   const [assignedTasks, setAssignedTasks] = useState([]);
+  const [multipleAssignedTask, setMultipleAssignedTask] = useState([]);
   const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [openChecklist, setOpenChecklist] = useState({});       // for individual checklists
   const [collapsedCategories, setCollapsedCategories] = useState({});       // for category-wise collapse
@@ -35,16 +36,20 @@ export default function Board() {
 
   const fetchTasks = async (filter) => {
     const userId = localStorage.getItem('userId');
+    let originalUserId;
 
     setLoading(true);
-    const [allTasksResponse, assignedTasksResponse] = await Promise.all([
+    const [allTasksResponse, assignedTasksResponse, multipleAssignedTasksResponse] = await Promise.all([
       getAllTasks(filter),
-      getAssignedTasks(userId, filter)
+      getAssignedTasks(userId, filter),
+      getTasksAssignedByUser(originalUserId, filter)
     ]);
+
     setLoading(false);
 
     setAllTasks(allTasksResponse?.data || []);
     setAssignedTasks(assignedTasksResponse?.data || []);
+    setMultipleAssignedTask(multipleAssignedTasksResponse?.data || []);
   };
 
   useEffect(() => {
@@ -84,7 +89,7 @@ export default function Board() {
     );
   };
 
-  const categorizedTasks = [...allTasks, ...assignedTasks].reduce((categories, task) => {
+  const categorizedTasks = [...allTasks, ...assignedTasks, ...multipleAssignedTask].reduce((categories, task) => {
     const category = task.category || 'To-do';
     categories[category] = categories[category] || [];
     categories[category].push(task);

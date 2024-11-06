@@ -3,6 +3,7 @@ import "./addPeople.css";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { fetchAllUsersExceptCurrent } from '../../apis/user';
 import { toast } from "react-toastify";
+import { assignTasksToUser } from '../../apis/task';
 
 export default function AddPeople({ onClose }) {
     const [allUsers, setAllUsers] = useState([]);
@@ -42,9 +43,15 @@ export default function AddPeople({ onClose }) {
         setOpenConfirmAddPeople(true);
     }
 
-    const handleConfirmAddPeople = () => {
-        onClose();
-        toast.success("Board assigned!");
+    const handleConfirmAddPeople = async () => {
+        try {
+            const response = await assignTasksToUser(selectedEmail);
+            onClose();
+            toast.success("Board assigned!");
+        } 
+        catch (error) {
+            toast.error("Error assigning tasks. Please try again.")
+        }
     };
 
     return (
